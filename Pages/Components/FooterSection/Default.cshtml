@@ -1,0 +1,78 @@
+@using System.Linq;
+@using Destinationosh.Components
+@using Destinationosh.Models
+@using Destinationosh.Services
+@inject RoutesService Routes;
+
+@model FooterSectionConfig
+
+<footer class="footer">
+  <div class="container">
+    <div class="rows">
+        @foreach(NavNode node in Routes.NavNode.Children)
+            {
+                if(Model.Nodes.Any(w => string.Equals(w, node.EnName, StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    <div class="footer-col">
+                        @if(Model.Culture == "en")
+                        {
+                            <h4>@node.EnName</h4>
+                            <ul>
+                                @foreach(var li in node.Children)
+                                {
+                                    
+                                    <li><a href="@Model.Culture/@Routes.GetPathTo(li)[5..]">@li.EnName</a></li>
+                                }
+                            </ul>
+                        }
+                        @if(Model.Culture == "ru")
+                        {
+                            <h4>@node.RuName</h4>
+                            <ul>
+                                @foreach(var li in node.Children)
+                                {
+                                    
+                                    <li><a href="@Model.Culture/@Routes.GetPathTo(li)[5..]">@li.RuName</a></li>
+                                }
+                            </ul>
+                        }
+                        @if(Model.Culture == "kg")
+                        {
+                            <h4>@node.KgName</h4>
+                            <ul>
+                                @foreach(var li in node.Children)
+                                {
+                                    
+                                    <li><a href="@Model.Culture/@Routes.GetPathTo(li)[5..]">@li.KgName</a></li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                }
+            }
+      <div class="footer-col">
+        <h4>follow us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="line-footer"></div>
+      <div class="footer-giz">
+        <img class="deutsch-logo" src="imgs/logo/shaitan-maschina.png" alt="">
+        <img class="giz-logo" src="imgs/logo/GIZ-removebg-preview.png" alt="">
+        @if(Model.Culture == "En")
+                {
+                    <p>The website has been modified with the support of the Kyrgyz-German-Swiss programme ‘Green Economy and Sustainable Private Sector Development in the KR’, implemented by GIZ)</p>
+                }
+                else
+                {
+                    <p>Сайт модифицирован при поддержке кыргызско-германо-швейцарской программы «Зелёная экономика и устойчивое развитие частного сектора в КР», реализуемая GIZ</p>
+                }
+                <p>© Destination Osh</p>
+      </div>
+    </div>
+  </div>
+</footer>

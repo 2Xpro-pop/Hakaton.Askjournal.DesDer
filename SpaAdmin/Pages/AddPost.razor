@@ -1,0 +1,104 @@
+@page "/addpost"
+@attribute [Authorize]
+@inject IPostContainerService PostContainer;
+@inject IPostService PostService;
+@inject IMatToaster Toaster;
+@inject NavigationManager NavigationManager;
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@inject ILogger<AddPost> Logger;
+@inject IJSRuntime JSRuntime;
+@inject ApplicationContext context;
+
+@inject IStringLocalizer<GlobalResources> GlobalLocalizer;
+@inject IStringLocalizer<AddPost> Localizer;
+
+<div class="addUser">
+    <h1 class="newUserTitle">
+        @Localizer["NewPost"]
+        <MatProgressCircle Indeterminate="true" FourColored="true" Closed="@Progress" Style="margin-left : 1rem;" />
+    </h1>
+    <EditForm Model="@Post" OnValidSubmit="@Submit" class="newUserForm">
+
+        <FluentValidationValidator />
+
+        <MatPaper Elevation="2" style="padding: 10px;">
+            <h2>@GlobalLocalizer["Route"]</h2>
+            <RoutesBuilder SelectedNodeChanged=@OnRouteChanged/>
+        </MatPaper>
+
+        <MatTextField @bind-Value=@Post.Name Label="@GlobalLocalizer["Name"]" />
+
+        <h2>@Localizer["Titles"]</h2>
+
+        <MatTextField @bind-Value=@Post.EnHeader Label=@GlobalLocalizer["EnName"] />
+        <MatTextField @bind-Value=@Post.DescriptionEn Label=@GlobalLocalizer["Description"] TextArea="true"/>
+        <br>
+        <MatTextField @bind-Value=@Post.RuHeader Label=@GlobalLocalizer["RuName"] />
+        <MatTextField @bind-Value=@Post.DescriptionRu Label=@GlobalLocalizer["Description"] TextArea="true"/>
+        <br>
+        <MatTextField @bind-Value=@Post.KgHeader Label=@GlobalLocalizer["KgName"] />
+        <MatTextField @bind-Value=@Post.DescriptionKg Label=@GlobalLocalizer["Description"] TextArea="true"/>
+
+        <MatButton Raised="true" Disabled="@(!Progress)">@GlobalLocalizer["Create"]</MatButton>
+
+        <ValidationSummary />
+    </EditForm>
+</div>
+
+@code
+{
+    private PostViewModel Post { get; set; } = new();
+    private bool Progress { get; set; } = true;
+    private NavNode NavNode { get; set; } 
+
+    private void OnRouteChanged(NavNode node)
+    {
+        Post.Route = node.Id.ToString();
+    }
+
+    private async void Submit()
+    {
+        if(context.Posts.Any(post => post.PathGuid == Post.Route ))
+        {
+            Toaster.Add(Localizer["RouteUsed"], MatToastType.Danger, GlobalLocalizer["Error"]);
+            return;
+        }
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var id = state.User.FindFirst(u => u.Type.Contains("nameidentifier"))?.Value;
+        Logger.LogInformation($"{id} is creating a new post");
+        Progress = false;
+        Post newPost;
+        try
+        {
+            await PostService.AddPost(
+                newPost = new Post()
+                {
+                    UserId = id,
+                    Name = Post.Name,
+                    PathGuid = Post.Route,
+                    RuHeader = Post.RuHeader,
+                    EnHeader = Post.EnHeader,
+                    KgHeader = Post.KgHeader,
+                    RuDescription = Post.DescriptionRu,
+                    EnDescription = Post.DescriptionEn,
+                    KgDescription = Post.DescriptionKg,
+                }
+            );
+        }
+        catch
+        {
+            Toaster.Add(Localizer["ErrorPostDescription"], MatToastType.Danger, GlobalLocalizer["Error"]);
+
+            Progress = true;
+            this.StateHasChanged();
+            return;
+        }
+        
+        Toaster.Add(Localizer["SuccessPostDescription"], MatToastType.Success, GlobalLocalizer["Success"]);
+        Progress = true;
+
+        this.StateHasChanged(); 
+
+        await JSRuntime.InvokeVoidAsync("helper.open", $"/DesDer/{newPost.Id}");
+    }
+}

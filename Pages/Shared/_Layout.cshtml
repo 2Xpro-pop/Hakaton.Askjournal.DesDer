@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using React.AspNet
+@namespace Destinationosh.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="@ViewData["lang"]">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @RenderSection("meta", required: false)
+    <base href="/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/stylish.css">
+    <link rel="stylesheet" type="text/css" href="/css/post.css">
+    <link href="/css/site.css" rel="stylesheet" />
+    <link href="/css/tlp.css" rel="stylesheet" />
+    <title>@ViewData["title"]</title>
+    <style>
+        .header
+        {
+            background-image: url(@ViewData["PathToImage"]);
+            color: @ViewData["TextColor"];
+        }
+    </style>
+</head>
+<body>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>const header_primary_color = '@ViewData["TextColor"]';</script>
+    <script src="/js/navmenu.js"></script>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+    <script src="/React/PostBuilder.jsx"></script>
+    <script src="/React/Paragraph.jsx"></script>
+    <script src="/React/Header.jsx"></script>
+    <script src="/React/Carousel.jsx"></script>
+    <script src="/React/Cards.jsx"></script>
+    <script src="/React/HeaderSubbar.jsx"></script>
+    <script src="/React/Image.jsx"></script>
+    <script src="/React/Table.jsx"></script>
+    <script src="/React/Quote.jsx"></script>
+    <script src="/React/BigCards.jsx"></script>
+    <script src="/React/Button.jsx"></script>
+    <script src="/React/Navmenu.jsx"></script>
+    <script src="/React/spa.js"></script>
+</body>
+</html>

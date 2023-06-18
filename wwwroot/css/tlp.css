@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --blue-background-color: #f5f5f5;
+  --card-background-color: #e3edf4;
+}
+
+body {
+  background-color: var(--blue-background-color);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.tlp-inter-600 {
+  font-weight: 600;
+}
+.tlp-inter-700 {
+  font-weight: 700;
+}
+
+.tlp-card {
+  border-radius: 15px;
+  background-color: var(--card-background-color);
+  height: 100%;
+}
+
+.tlp-footer {
+  margin-top: 10%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+}
+
+.tlp-footer-text {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.tlp-footer-link {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.tlp-footer-link:hover {
+  text-decoration: underline;
+}
+.tlp-img{
+    width: 49.33px;
+    height: 34px;
+    object-fit: contain;
+}
+.tlp-navtabs {
+    font-size: 13px;
+    padding-left: 2%;
+}
+.tlp-navbar {
+    padding: 15px;
+}
+p{
+    color: #323232;
+}
+.tlp-bootombar{
+    padding: 28px 0 28px;
+}
+
+/* All select elements on page */
+.tlp-select-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+.tlp-select-box {
+    border: none;
+    appearance: none;
+    padding: 0 15px 0 15px;
+    width: 100%;
+    font-size: 20px;
+    background-color: white;
+    outline: 1px solid rgb(168, 168, 179);
+    border-radius: 8px;
+}
+
+    .tlp-select-box:focus {
+        -webkit-box-shadow: 0px 0px 23px 8px rgba(46, 133, 201, 0.35);
+        -moz-box-shadow: 0px 0px 23px 8px rgba(46, 133, 201, 0.35);
+        box-shadow: 0px 0px 23px 8px rgba(46, 133, 201, 0.35);
+    }
+
+    .tlp-select-box:hover {
+        background-color: #fbfcfe;
+    }
+
+.tlp-select-container .tlp-icon-container {
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tlp-icon-container i {
+    font-size: 30px;
+}
+
+.tlp-icon-container img {
+    width: 20px;
+}
+
+.tlp-container {
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+}

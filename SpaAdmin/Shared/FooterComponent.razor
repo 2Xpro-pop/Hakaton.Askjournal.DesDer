@@ -1,0 +1,48 @@
+﻿@inject IComponentDataProvider ComponentDataProvider
+@inject IOptionsMonitor<SupportedCultureOptions> SupportedCulture
+
+<h2>Описание</h2>
+@if (FooterConfig != null)
+{
+    <div class="@BS.Input_Group mb-3">
+
+
+        @foreach (var culture in SupportedCulture.CurrentValue.SupportedCultures.Keys)
+        {
+            <span class="@BS.Input_Group_Text">@culture</span>
+            <BSInput placeholder=@culture @bind-Value=FooterConfig.Descriptions[culture]/>
+        }
+    </div>
+
+    @foreach (var category in FooterConfig.FooterCategories)
+    {
+        <FooterCategoryComponent FooterCategory=@category />
+    }
+
+    <MatButton Label="Добавить категорию" Raised Style="width: 100%;"/>
+}
+else
+{
+    <MatProgressCircle/>
+}
+@code {
+    private const string FooterComponentId = "FOOTER_COMPONENT_ID";
+    private FooterConfig FooterConfig { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        FooterConfig = await ComponentDataProvider.GetConfig<FooterConfig>(FooterComponentId);
+        if(FooterConfig == null)
+        {
+            FooterConfig = new();
+        }
+
+        foreach(var culture in SupportedCulture.CurrentValue.SupportedCultures.Keys)
+        {
+            if(!FooterConfig.Descriptions.ContainsKey(culture))
+            {
+                FooterConfig.Descriptions[culture] = culture;
+            }
+        }
+    }
+}

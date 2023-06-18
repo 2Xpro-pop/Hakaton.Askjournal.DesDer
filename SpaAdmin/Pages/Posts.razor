@@ -1,0 +1,74 @@
+@page "/posts"
+@attribute [Authorize]
+@inject IPostContainerService PostContainerService;
+@inject NavigationManager NavigationManager;
+@inject IPostService PostService;
+@inject IMatToaster Toaster;
+@inject IMatDialogService MatDialogService;
+@inject RoutesService RoutesService;
+@inject IStringLocalizer<Posts> Localizer;
+
+@if (posts != null)
+{
+    <MatTable Items="@posts" PageSize="10" class="mat-elevation-z5">
+        <MatTableHeader >
+            <th>@Localizer["Options"]</th>
+            <th>@Localizer["Name"]</th>
+            <th>@Localizer["Author"]</th>
+            <th>@Localizer["Route"]</th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td class="options">
+                <button class="button bg-danger" onclick="@(async () => RemovePost(context))">
+                    <span class="oi oi-trash" aria-hidden="true"></span>
+                </button>
+                <button class="button bg-primary" onclick="@( () => OpenAnalytics(context) )">
+                    <span class="oi oi-eye" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td>@context.Name</td>
+            <td>@context.User.FullName</td>
+            <td>@try
+                {
+                    @RoutesService.NavNode.GetPathTo(Guid.Parse(context.PathGuid)).Remove(0,5)
+                }
+                catch
+                {
+                    var path = "/";
+                    @path;
+                }
+                </td>
+        </MatTableRow>
+    </MatTable>
+}
+@code {
+    private List<Post> posts = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        posts = new(await PostService.GetPosts());
+    }
+
+    private async void RemovePost(Post post)
+    {
+        if(!await MatDialogService.ConfirmAsync("Вы уверены?"))
+        {
+            return;
+        }
+        var task = PostService.RemovePost(post);
+        await task;
+
+        if(task.IsCompletedSuccessfully)
+        {
+            Toaster.Add($"Post \"{post.Name}\" removed", MatToastType.Success, "Succes");
+        }
+        posts.Remove(post);
+        this.StateHasChanged();
+    }
+
+    private void OpenAnalytics(Post post)
+    {
+        NavigationManager.NavigateTo($"analytics/{post.Id}");
+    }
+    
+}

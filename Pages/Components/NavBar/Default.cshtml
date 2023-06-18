@@ -1,0 +1,110 @@
+@using Destinationosh.Middlewares
+@using Destinationosh.Models
+@using Destinationosh.Services;
+@using Microsoft.Extensions.Options
+@inject RoutesService Routes
+@inject IOptionsSnapshot<SupportedCultureOptions> SupportedCultureOptions
+
+@functions {
+    public void ShowMenu(NavNode node)
+    {
+        if (node.Children.Count > 0)
+        {
+            foreach (NavNode child in node.Children)
+            {
+                if (child.IsHide) continue;
+
+                if (child == node.Children.First())
+                {
+                    <li class="nav-item dropdown" style="color: @ViewData["TextColor"] !important" id="nav-text">
+                        @{
+                            ShowMenuItem(child); 
+                        }
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item dropdown" style="color: @ViewData["TextColor"] !important">
+                        @{
+                            ShowMenuItem(child); 
+                        }
+                    </li>
+                }
+            }
+        }
+    }
+
+    public void ShowMenuItem(NavNode node)
+    {
+
+        if (node.Children.Count > 0)
+        {
+            <a class="nav-link dropdown-toggle" style="color: @ViewData["TextColor"] !important" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                @node.EnName
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @foreach (NavNode child in node.Children)
+                {
+                    <li class="nav-item">
+                        <a class="dropdown-item" style="color: @ViewData["TextColor"] !important" href="@Model.Culture/@node.SubPath/@child.SubPath">@child.EnName</a>
+                    </li>
+                    @if (child != node.Children.Last())
+                    {
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    }
+                }
+            </ul>
+        }
+        else
+        {
+            <a class="nav-link" id="nav-text" style="color: @ViewData["TextColor"] !important" href="@Model.Culture/@node.SubPath">@node.EnName</a>
+        }
+    }
+}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" id="main-nav">
+    <div class="container-fluid">
+        <a href="/@Model.Culture" logo>
+            <img class="logo" src="imgs/logo/logo.png" href="/@Model.Culture" logo />
+        </a>
+        <button id="menubar" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @{
+                    ShowMenu(Routes.NavNode); 
+                }
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown" style="color: @ViewData["TextColor"] !important" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <span class="material-symbols-outlined"> language </span>
+                    </a>
+                    <ul id="lng" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="ru">Русский</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="en">English</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="kg">Кыргызча</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="dropdown-item" style="background-color:white" href="http://localhost:5000/" not-override>
+                        <img style="width: 28px;" src="~/imgs/fast.svg" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

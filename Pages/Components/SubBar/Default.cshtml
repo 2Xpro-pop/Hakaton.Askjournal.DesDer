@@ -1,0 +1,12 @@
+@using Destinationosh.Models
+@using Destinationosh.Services;
+@inject RoutesService Routes;
+
+@if(!string.IsNullOrWhiteSpace(Model.SubPath))
+{
+  var route = Routes.NavNode[Model.SubPath];
+  foreach(NavNode node in route.Children)
+  {
+    <a class="btn btn-outline-light text-dark" href="/@Model.Culture/@route.SubPath/@node.SubPath">@node.EnName</a> 
+  }
+}

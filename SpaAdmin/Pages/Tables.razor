@@ -1,0 +1,39 @@
+﻿@page "/tables"
+@using Microsoft.EntityFrameworkCore;
+
+@inject ICustomTableService TableService
+@inject IStringLocalizer<GlobalResources> Localizer
+
+
+
+@if (customTables != null)
+{
+    <MatTable Items="@customTables" class="mat-elevation-z5">
+
+        <MatTableHeader>
+            <th style="width: 30%">@Localizer["KgName"]</th>
+            <th style="width: 30%">@Localizer["EnName"]</th>
+            <th style="width: 30%">@Localizer["RuName"]</th>
+            <th>@Localizer["Rows"]</th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td>@context.KgName</td>
+            <td>@context.EnName</td>
+            <td>@context.RuName</td>
+            <td>@context.CustomTableRows.Count()</td>
+        </MatTableRow>
+    </MatTable>
+}
+else
+{
+    <MatProgressCircle Indeterminate="true" FourColored="true" />
+}
+
+@code {
+    IEnumerable<CustomTable> customTables;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customTables = await TableService.GetAllTables().Include(x => x.CustomTableRows).ToListAsync();
+    }
+}

@@ -1,0 +1,90 @@
+@inject RoutesService RoutesService;
+@inject IStringLocalizer<GlobalResources> Localizer;
+@inject IMatToaster Toaster;
+@inject IMatDialogService MatDialogService;
+@inject ILogger<RoutesBuilder> Logger;
+
+<RadzenTree Data=NavNode.Children Change=@OnValueChange @bind-Value=@selection >
+    <RadzenTreeLevel TextProperty="SubPath" ChildrenProperty="Children" HasChildren=@(nav => (nav as
+        NavNode).Children.Any()) />
+</RadzenTree>
+
+@if(SelectedNode != null)
+{
+    <h4>@Localizer["IsHide"]</h4>
+    <MatCheckbox @bind-Value=SelectedNode.IsHide />
+}
+
+@if(CanAdded)
+{
+
+<div class="addUser">
+    <EditForm Model=@NewRouteModel style="margin:0px" OnValidSubmit=@OnSubmit class="newUserForm">
+        <FluentValidationValidator />
+        <MatTextField Label=@Localizer["Path"] @bind-Value=@NewRouteModel.Name />
+        <MatTextField Label=@Localizer["EnName"] @bind-Value=@NewRouteModel.En />
+        <MatTextField Label=@Localizer["RuName"] @bind-Value=@NewRouteModel.Ru />
+        <MatTextField Label=@Localizer["KgName"] @bind-Value=@NewRouteModel.Kg />
+        <MatButton Raised="true" Disabled=@(SelectedNode == null)>@Localizer["Create"]</MatButton>
+        <ValidationSummary />
+    </EditForm>
+    <MatButton Disabled=@(SelectedNode == null || SelectedNode == RoutesService.NavNode) Style="width: 100%;" OnClick=@(async _ => await Remove() ) >@Localizer["Remove"]</MatButton>
+</div>
+}
+
+@code {
+    [Parameter]
+    public NavNode? NavNode { get; set; }
+    [Parameter]
+    public NavNode? SelectedNode { get => selection as NavNode; set => selection = value; }
+    private object selection;
+    [Parameter]
+    public bool CanAdded 
+    {
+        get;
+        set;
+    } = true;
+    [Parameter]
+    public EventCallback<NavNode> SelectedNodeChanged { get; set; }
+    public RouteViewModel NewRouteModel { get; set; } = new RouteViewModel();
+
+    protected override void OnInitialized()
+    {
+        NavNode = new NavNode() { Children = new List<NavNode>() { RoutesService.NavNode } };
+    }
+
+    void OnValueChange()
+    {
+        SelectedNodeChanged.InvokeAsync(SelectedNode);
+        RoutesService.SaveChanges();
+    }
+
+    void OnSubmit()
+    {
+        SelectedNode.Children.Add( new NavNode
+        {
+            Id = Guid.NewGuid(),
+            SubPath = NewRouteModel.Name,
+            EnName = NewRouteModel.En,
+            RuName = NewRouteModel.Ru,
+            KgName = NewRouteModel.Kg,
+            Children = new List<NavNode>()
+        });
+        RoutesService.SaveChanges();
+        Toaster.Add(Localizer["RouteAdded"], MatToastType.Success, Localizer["Success"]);
+    }
+
+    async Task Remove()
+    {
+        Logger.LogInformation($"Removing {SelectedNode.SubPath}");
+        if(!await MatDialogService.ConfirmAsync(Localizer["Confirm"]))
+        {
+            return;
+        }
+
+        RoutesService.NavNode.Remove(SelectedNode);
+        RoutesService.SaveChanges();
+
+        Toaster.Add(Localizer["RouteRemoved"], MatToastType.Success, Localizer["Success"]);
+    }
+}

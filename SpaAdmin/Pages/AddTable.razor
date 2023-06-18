@@ -1,0 +1,64 @@
+﻿@page "/addtable"
+
+@inject ICustomTableService TableService
+@inject ILogger<AddTable> logger;
+@inject IMatToaster Toaster;
+@inject IStringLocalizer<GlobalResources> Localizer;
+@inject ISecuredRunner Runner;
+
+<h1 class="newUserTitle">
+    @Localizer["NewTable"]
+    <MatProgressCircle Indeterminate="true" FourColored="true" Closed="@Progress" Style="margin-left : 1rem;" />
+</h1>
+<EditForm Model="@TableViewModel" OnValidSubmit="@Submit" class="newUserForm">
+
+    <FluentValidationValidator />
+
+    <MatTextField @bind-Value="TableViewModel.KgName" Label=@Localizer["KgName"] />
+    <MatTextField @bind-Value="TableViewModel.RuName" Label=@Localizer["RuName"] />
+    <MatTextField @bind-Value="TableViewModel.EnName" Label=@Localizer["EnName"] />
+
+    <MatButton Raised="true" Disabled="@(!Progress)">@Localizer["Create"]</MatButton>
+
+    <ValidationSummary />
+</EditForm>
+
+@code
+{
+    [CascadingParameter(Name = "LogoutAction")]
+    private Action LogoutAction { get; set; }
+    private TableViewModel TableViewModel { get; set; } = new();
+    private bool Progress { get; set; } = true;
+
+    private async void Submit()
+    {
+        Progress = false;
+
+        Runner.SetRoles("admin")
+            .SetLocalizer(Localizer)
+            .OnBadAuth(async () =>
+            {
+                await Task.Delay(4000);
+                LogoutAction?.Invoke();
+            })
+            .OnSuccess(() =>
+            {
+                Toaster.Add(Localizer["Succes"], MatToastType.Success);
+            });
+
+        await Runner.Run(async () =>
+        {
+            var task = TableService.CreateTable(new()
+                {
+                    RuName = TableViewModel.RuName,
+                    EnName = TableViewModel.EnName,
+                    KgName = TableViewModel.KgName
+                });
+
+            await task;
+        });
+
+        Progress = true;
+        this.StateHasChanged();
+    }
+}

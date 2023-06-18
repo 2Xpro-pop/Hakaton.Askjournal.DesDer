@@ -1,0 +1,64 @@
+.post-block.with-background 
+{
+    background-color: #f0f0f0;
+}
+
+.post-block .post-block-content
+{
+    max-width : 80%;
+    margin: 0 auto;
+}
+
+.post-block.stretched .post-block-content
+{
+    max-width: none;
+}
+
+.post-block .post-block-content > img
+{
+    width: 100%;
+}
+.post-block.with-background .post-block-content
+{
+    padding: 15px;
+}
+.post-block.with-background .post-block-content img
+{
+    max-width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+
+.post-block.with-border .post-block-content img
+{
+    border: 2px solid #e0e0e0;
+    border-radius: 3px;
+}
+
+.post-block-content .info-card
+{
+    flex-basis: 31%;
+    background: rgb(238, 238, 238);
+    border-radius: 30px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.post-block-content .info-card img
+{
+    width: 300px;
+    height: 200px;
+    border-radius: 30px;
+}
+
+.post-block-content .info-card:hover {
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+  }
+
+.post-block-content > p
+{
+    line-height: 1.6em;
+    padding: 0.4em 0;
+}

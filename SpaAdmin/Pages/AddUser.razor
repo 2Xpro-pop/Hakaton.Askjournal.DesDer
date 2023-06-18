@@ -1,0 +1,71 @@
+@page "/adduser"
+@attribute [Authorize]
+@inject IUserService UserService;
+@inject ILogger<AddUser> logger;
+@inject IMatToaster Toaster;
+@inject IStringLocalizer<GlobalResources> GlobalLocalizer;
+@inject IStringLocalizer<Users> Localizer;
+@inject ISecuredRunner Runner;
+
+<div class="addUser">
+    <h1 class="newUserTitle">
+        New User
+        <MatProgressCircle Indeterminate="true" FourColored="true" Closed="@Progress" Style="margin-left : 1rem;" />
+    </h1>
+    <EditForm Model="@User" OnValidSubmit="@Submit" class="newUserForm">
+
+        <FluentValidationValidator />
+
+        <MatTextField @bind-Value="User.Login" Label=@Localizer["Login"] Type="Login"/>
+        <MatTextField @bind-Value="User.Password" Label=@Localizer["Password"] Type="password" autocomplete="new-password"/>
+        <MatTextField @bind-Value="User.ConfirmPassword" Label=@Localizer["ConfirmPassword"] Type="password" autocomplete="new-password"/>
+        <MatTextField @bind-Value="User.FullName" Label=@Localizer["FullName"] />
+        <MatTextField @bind-Value="User.Email" Label=@Localizer["Email"] />
+        <MatButton Raised="true" Disabled="@(!Progress)">@GlobalLocalizer["Create"]</MatButton>
+
+        <ValidationSummary />
+    </EditForm>
+</div>
+
+@code
+{
+    [CascadingParameter(Name = "LogoutAction")]
+    private Action LogoutAction { get; set;}
+    private UserViewModel User { get; set; } = new();
+    private bool Progress { get; set; } = true;
+    private UserRole[] _allRoles = Enum.GetValues(typeof(UserRole)).Cast<UserRole>().ToArray();
+
+    private async void Submit()
+    {
+        Progress = false;
+        
+        Runner.SetRoles("admin")
+            .SetLocalizer(GlobalLocalizer)
+            .OnBadAuth(async () =>
+            {
+                await Task.Delay(4000);
+                LogoutAction?.Invoke();
+            })
+            .OnSuccess( () => 
+            {
+                Toaster.Add(GlobalLocalizer["Succes"], MatToastType.Success, Localizer["UserCreated"]);
+            });
+        
+        await Runner.Run(async () =>
+        {
+            var task  = UserService.AddUser( new Models.User()
+            {
+                UserName = User.Login,
+                FullName = User.FullName,
+                Password = User.Password,
+                Email = User.Email,
+                Role = User.Role
+            });
+
+            await task;
+        });
+        
+        Progress = true;
+        this.StateHasChanged();
+    }
+}

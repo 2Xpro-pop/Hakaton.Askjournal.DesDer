@@ -1,0 +1,29 @@
+﻿@inject IOptionsMonitor<SupportedCultureOptions> SupportedCulture
+
+    
+<div class="input-group mb-3">
+@foreach(var culture in SupportedCulture.CurrentValue.SupportedCultures.Keys)
+{
+        <span class="@BS.Input_Group_Text">@culture</span>
+        <BSInput placeholder=@culture  @bind-Value=FooterElement[culture]/>
+}
+ </div>
+ <MatTextField Icon=@MatIconNames.Link @bind-Value=FooterElement.Link FullWidth=true Outlined=true/>
+
+@code {
+    [Parameter]
+    public FooterCategoryComponent FooterCategoryComponent { get; set; } = null!;
+    [Parameter]
+    public FooterElement FooterElement { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        foreach(var culture in SupportedCulture.CurrentValue.SupportedCultures.Keys)
+        {
+            if(!FooterElement.Names.ContainsKey(culture))
+            {
+                FooterElement[culture] = culture;
+            }
+        }
+    }
+}

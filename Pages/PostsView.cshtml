@@ -1,0 +1,37 @@
+@page
+@using React.AspNet
+@addTagHelper *, Destinationosh
+@{
+    Layout = "_Layout";
+    ViewData["lang"] = RouteData.Values["culture"];
+    ViewData["title"] = Model.Header;
+    ViewData["PathToImage"] = Model.PathToImage;
+    ViewData["TextColor"] = Model.TextColor;
+}
+
+@section meta{
+    <meta name="description" content="@Model.Description" />
+    <meta name="keywords" content="@Model.Keywords" />
+}
+
+@model PostsViewPageModel
+
+<vc:header-section header=@Model.Header description=@Model.Description culture=@Model.Culture></vc:header-section>
+
+<main>
+    @Html.React("PostBuilder", new{ data = Model.Data, tabels = Model.Tabels}, serverOnly:true);
+</main>
+
+<footer class="tlp-footer">
+    <p class="tlp-footer-text">© 2023 Designed by <a href="#" class="tlp-footer-link">TLP</a></p>
+</footer>
+
+
+@section scripts {
+    <script>
+        @{
+            var json = Json.Serialize(Model.Tabels);
+        }
+        @Html.Raw(@$"const tabelsParsed = JSON.parse(`{json}`);");
+    </script>
+}

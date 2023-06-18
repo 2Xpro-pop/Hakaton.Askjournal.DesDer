@@ -1,0 +1,54 @@
+@page "/users"
+@attribute [Authorize]
+@inject IUserService UserService;
+@inject IMatToaster Toaster;
+@inject IMatDialogService MatDialogService;
+@inject UserManager<User> UserManager;
+@inject IStringLocalizer<Users> Localizer;
+@inject IStringLocalizer<GlobalResources> GlobalLocalizer;
+@if (@users != null)
+{
+    <MatTable Items="@users" PageSize="10" class="mat-elevation-z5">
+        <MatTableHeader >
+            <th>@Localizer["Options"]</th>
+            <th>@Localizer["Role"]</th>
+            <th>@Localizer["Email"]</th>
+            <th>@Localizer["FullName"]</th>
+        </MatTableHeader>
+        <MatTableRow>
+            <td class="options">
+                <button class="button bg-danger" onclick="@(async () => RemoveUser(context))">
+                    <span class="oi oi-trash" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td>@context.Role</td>
+            <td>@context.Email</td>
+            <td>@context.FullName</td>
+        </MatTableRow>
+    </MatTable>
+}
+@code {
+    private List<User> users = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = new(await UserService.GetUsersAsync());
+    }
+
+    private async void RemoveUser(User user)
+    {
+        if(!await MatDialogService.ConfirmAsync(GlobalLocalizer["Confirm"]))
+        {
+            return;
+        }
+        var task = UserService.RemoveUser(user);
+        await task;
+
+        if(task.IsCompletedSuccessfully)
+        {
+            Toaster.Add(Localizer["UserDeleted"], MatToastType.Success, GlobalLocalizer["Succes"]);
+        }
+        users.Remove(user);
+        this.StateHasChanged();
+    }
+}

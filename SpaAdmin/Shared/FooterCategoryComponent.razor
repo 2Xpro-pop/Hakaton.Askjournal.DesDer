@@ -1,0 +1,14 @@
+﻿<BSCollapse>
+    <Toggler><BSToggle IsButton="true" Color="BSColor.Primary">@FooterCategory.Name</BSToggle></Toggler>
+    <Content>
+        @foreach(var category in FooterCategory)
+        {
+            <FooterElementComponent FooterCategoryComponent=@this FooterElement=@category/>
+        }
+    </Content>
+</BSCollapse>
+
+@code {
+    [Parameter]
+    public FooterCategory FooterCategory { get; set; }
+}
