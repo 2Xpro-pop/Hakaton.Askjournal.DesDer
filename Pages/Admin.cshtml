@@ -24,7 +24,7 @@
         <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
         <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
-        <link href="Destinationosh.styles.css" rel="stylesheet" />
+        <link href="DesDer.styles.css" rel="stylesheet" />
         <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     }
     <link href="css/site.css" rel="stylesheet" />
@@ -33,7 +33,7 @@
 <body>
     @if (SignInManager.IsSignedIn(User))
     {
-        <component type="typeof(SpaAdmin.App)" render-mode="ServerPrerendered" />
+        <component type="typeof(DesDer.SpaAdmin.App)" render-mode="ServerPrerendered" />
 
         <div id="blazor-error-ui">
             <environment include="Staging,Production">

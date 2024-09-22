@@ -38,7 +38,7 @@
     private async void Submit()
     {
         Progress = false;
-        
+
         Runner.SetRoles("admin")
             .SetLocalizer(GlobalLocalizer)
             .OnBadAuth(async () =>
@@ -50,10 +50,10 @@
             {
                 Toaster.Add(GlobalLocalizer["Succes"], MatToastType.Success, Localizer["UserCreated"]);
             });
-        
+
         await Runner.Run(async () =>
         {
-            var task  = UserService.AddUser( new Models.User()
+            var task  = UserService.AddUser( new Destinationosh.Models.User()
             {
                 UserName = User.Login,
                 FullName = User.FullName,
