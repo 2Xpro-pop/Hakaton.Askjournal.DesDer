@@ -1,4 +1,4 @@
-﻿namespace Destinationosh.SpaAdmin.ViewModels;
+﻿namespace DesDer.SpaAdmin.ViewModels;
 
 public class TableViewModel
 {

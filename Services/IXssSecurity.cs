@@ -1,4 +1,4 @@
-namespace Destinationosh.Services
+namespace DesDer.Services
 {
     public interface IXssSecurity
     {

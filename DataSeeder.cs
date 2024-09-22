@@ -1,5 +1,5 @@
 
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.AspNetCore.Identity;
 
 public static class DataSeeder 

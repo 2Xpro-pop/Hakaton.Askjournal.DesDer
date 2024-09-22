@@ -1,6 +1,6 @@
 using Newtonsoft.Json.Linq;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class Paragraph : IBlockConverter
 {

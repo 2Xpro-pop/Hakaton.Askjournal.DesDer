@@ -1,4 +1,4 @@
-﻿namespace Destinationosh.Services
+﻿namespace DesDer.Services
 {
     /// <summary>
     /// YOU NEED TO GET RID OF THIS

@@ -1,8 +1,8 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class PostService : IPostService
 {

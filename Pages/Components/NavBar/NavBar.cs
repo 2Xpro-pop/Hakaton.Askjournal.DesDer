@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Destinationosh.Components;
+namespace DesDer.Components;
 
 public class NavBar : ViewComponent
 {

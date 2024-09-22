@@ -1,7 +1,7 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.Extensions.Primitives;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public interface IPostService
 {

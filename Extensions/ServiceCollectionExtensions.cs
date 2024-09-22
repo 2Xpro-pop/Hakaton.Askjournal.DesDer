@@ -1,8 +1,8 @@
-using Destinationosh.Services;
+using DesDer.Services;
 using MatBlazor;
 using Radzen;
 
-namespace Destinationosh.Extensions
+namespace DesDer.Extensions
 {
     public static class ServiceCollectionExtensions
     {

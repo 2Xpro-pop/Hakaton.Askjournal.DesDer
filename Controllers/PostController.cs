@@ -1,5 +1,5 @@
-using Destinationosh.Models;
-using Destinationosh.Services;
+using DesDer.Models;
+using DesDer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

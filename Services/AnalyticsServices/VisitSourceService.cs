@@ -1,8 +1,8 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using JM.LinqFaster;
 using Microsoft.Extensions.Options;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class VisitsSourceService
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Destinationosh.Models;
+namespace DesDer.Models;
 
 public class Post
 {

@@ -1,4 +1,4 @@
-namespace Destinationosh.Middlewares;
+namespace DesDer.Middlewares;
 
 public class SupportedCultureOptions
 {

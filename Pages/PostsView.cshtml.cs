@@ -1,10 +1,10 @@
-using Destinationosh.Models;
-using Destinationosh.Services;
+using DesDer.Models;
+using DesDer.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Destinationosh.Pages;
+namespace DesDer.Pages;
 
 public class PostsViewPageModel : PageModel
 {

@@ -1,8 +1,8 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using MatBlazor;
 using Microsoft.EntityFrameworkCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class FileService : IFileService
 {

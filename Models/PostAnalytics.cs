@@ -1,4 +1,4 @@
-namespace Destinationosh.Models;
+namespace DesDer.Models;
 
 public record PostAnalytics(
     IEnumerable<VisitsDayCount> LastWeek, 

@@ -1,7 +1,7 @@
-using Destinationosh.Services;
+using DesDer.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Destinationosh.Controllers;
+namespace DesDer.Controllers;
 
 
 [Route("[controller]")]

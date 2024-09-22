@@ -1,9 +1,9 @@
 using System.Text;
 using System.Text.Json;
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 public class RoutesService
 {
     private static readonly Dictionary<string, NavNode> _memo = new();

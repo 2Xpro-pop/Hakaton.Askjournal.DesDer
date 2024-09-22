@@ -1,6 +1,6 @@
-﻿using Destinationosh.Models;
+﻿using DesDer.Models;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public interface IImageService
 {

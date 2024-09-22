@@ -1,8 +1,8 @@
-using Destinationosh.Middlewares;
+using DesDer.Middlewares;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
-namespace Destinationosh.Extensions
+namespace DesDer.Extensions
 {
     public static class WebApplicationExtensions
     {

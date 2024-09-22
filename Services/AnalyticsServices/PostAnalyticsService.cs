@@ -1,8 +1,8 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.EntityFrameworkCore;
 using JM.LinqFaster;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class PostAnalyticsService : IPostAnalyticsService
 {

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Localization;
-using Destinationosh.Services;
+using DesDer.Services;
 
-namespace Destinationosh.Pages;
+namespace DesDer.Pages;
 
 public class AdminPageModel : PageModel
 {

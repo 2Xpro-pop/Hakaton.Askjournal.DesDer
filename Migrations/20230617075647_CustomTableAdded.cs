@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Destinationosh.Migrations
+namespace DesDer.Migrations
 {
     /// <inheritdoc />
     public partial class CustomTableAdded : Migration

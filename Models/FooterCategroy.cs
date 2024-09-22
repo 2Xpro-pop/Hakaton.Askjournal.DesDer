@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Destinationosh.Models;
+namespace DesDer.Models;
 
 public class FooterCategory : IEnumerable<FooterElement>
 {

@@ -1,8 +1,8 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Destinationosh.Components;
+namespace DesDer.Components;
 
 public class HeaderSection : ViewComponent
 {

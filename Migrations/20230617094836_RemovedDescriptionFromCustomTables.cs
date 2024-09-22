@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Destinationosh.Migrations
+namespace DesDer.Migrations
 {
     /// <inheritdoc />
     public partial class RemovedDescriptionFromCustomTables : Migration

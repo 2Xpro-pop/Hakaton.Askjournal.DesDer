@@ -1,11 +1,11 @@
 using System.Linq.Expressions;
 using System.Text.Json;
-using Destinationosh.Models;
-using Destinationosh.Services;
+using DesDer.Models;
+using DesDer.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Destinationosh.Pages;
+namespace DesDer.Pages;
 
 public class DesDerPageModel : PageModel
 {

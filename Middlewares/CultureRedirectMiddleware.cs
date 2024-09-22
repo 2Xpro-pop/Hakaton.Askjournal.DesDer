@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Options;
 
-namespace Destinationosh.Middlewares;
+namespace DesDer.Middlewares;
 
 public class CultureRedirectMiddleware
 {

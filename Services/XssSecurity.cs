@@ -1,6 +1,6 @@
 using HtmlAgilityPack;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 public class XssSecurity : IXssSecurity
 {
     private static readonly string[] _allowedTags = new string[]

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Destinationosh.Controllers;
+namespace DesDer.Controllers;
 
 [Route("[controller]")]
 [Authorize]

@@ -1,10 +1,10 @@
-﻿using Destinationosh.Services;
+﻿using DesDer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Text.Json;
 
-namespace Destinationosh.Controllers;
+namespace DesDer.Controllers;
 
 [Route("api/[controller]")]
 public class ComponentController : ControllerBase

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Destinationosh.Models;
+using DesDer.Models;
 
-namespace Destinationosh.SpaAdmin.ViewModels;
+namespace DesDer.SpaAdmin.ViewModels;
 
 public class UserViewModel
 {

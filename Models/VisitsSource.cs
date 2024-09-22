@@ -1,3 +1,3 @@
-namespace Destinationosh.Models;
+namespace DesDer.Models;
 
 public record VisitsSource(int Count, string Source);

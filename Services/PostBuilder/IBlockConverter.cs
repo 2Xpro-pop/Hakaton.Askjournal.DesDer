@@ -1,7 +1,7 @@
 using Newtonsoft.Json.Linq;
 using RazorEngineCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public interface IBlockConverter
 {

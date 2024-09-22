@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Localization;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public interface ISecuredRunner
 {

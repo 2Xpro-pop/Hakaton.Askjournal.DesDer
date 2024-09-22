@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class ComponentDataProvider : IComponentDataProvider
 {

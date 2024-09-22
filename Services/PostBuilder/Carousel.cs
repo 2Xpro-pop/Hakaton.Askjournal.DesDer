@@ -2,7 +2,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using RazorEngineCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class Carousel : IBlockConverter
 {

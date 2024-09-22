@@ -1,9 +1,9 @@
 
 
-using Destinationosh.Models;
+using DesDer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class FileUploaderService : IFileUploaderService
 {

@@ -1,8 +1,8 @@
-using Destinationosh.Services;
+using DesDer.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
-namespace Destinationosh.Middlewares;
+namespace DesDer.Middlewares;
 
 public class RouteCultureProvider : IRequestCultureProvider
 {

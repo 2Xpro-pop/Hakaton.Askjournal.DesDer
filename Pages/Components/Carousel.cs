@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace Destinationosh.Components;
+namespace DesDer.Components;
 
 public class Carousel : ComponentBase
 {

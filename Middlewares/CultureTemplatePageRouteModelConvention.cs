@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Logging;
 
-namespace Destinationosh.Middlewares; 
+namespace DesDer.Middlewares; 
 
 public class CultureTemplatePageRouteModelConvention : IPageRouteModelConvention
 {

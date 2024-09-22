@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Destinationosh.Migrations
+namespace DesDer.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20230617080101_ProxyAddedCustomTableToRows")]
@@ -24,7 +24,7 @@ namespace Destinationosh.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Destinationosh.Models.ComponentConfig", b =>
+            modelBuilder.Entity("DesDer.Models.ComponentConfig", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -38,7 +38,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("ComponentConfigs");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomField", b =>
+            modelBuilder.Entity("DesDer.Models.CustomField", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("CustomFields");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomTable", b =>
+            modelBuilder.Entity("DesDer.Models.CustomTable", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("CustomTables");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomTableRow", b =>
+            modelBuilder.Entity("DesDer.Models.CustomTableRow", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("CustomTableRows");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomValue", b =>
+            modelBuilder.Entity("DesDer.Models.CustomValue", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -145,7 +145,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("CustomValues");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.FileModel", b =>
+            modelBuilder.Entity("DesDer.Models.FileModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,7 +166,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("Files");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.Post", b =>
+            modelBuilder.Entity("DesDer.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -219,7 +219,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.PostVisit", b =>
+            modelBuilder.Entity("DesDer.Models.PostVisit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -246,7 +246,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("PostVisits");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.RouteModel", b =>
+            modelBuilder.Entity("DesDer.Models.RouteModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -263,7 +263,7 @@ namespace Destinationosh.Migrations
                     b.ToTable("Routes");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.User", b =>
+            modelBuilder.Entity("DesDer.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -467,9 +467,9 @@ namespace Destinationosh.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomField", b =>
+            modelBuilder.Entity("DesDer.Models.CustomField", b =>
                 {
-                    b.HasOne("Destinationosh.Models.CustomTable", "CustomTable")
+                    b.HasOne("DesDer.Models.CustomTable", "CustomTable")
                         .WithMany("CustomFields")
                         .HasForeignKey("CustomTableId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -478,9 +478,9 @@ namespace Destinationosh.Migrations
                     b.Navigation("CustomTable");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomTableRow", b =>
+            modelBuilder.Entity("DesDer.Models.CustomTableRow", b =>
                 {
-                    b.HasOne("Destinationosh.Models.CustomTable", "CustomTable")
+                    b.HasOne("DesDer.Models.CustomTable", "CustomTable")
                         .WithMany("CustomTableRows")
                         .HasForeignKey("CustomTableId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -489,15 +489,15 @@ namespace Destinationosh.Migrations
                     b.Navigation("CustomTable");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomValue", b =>
+            modelBuilder.Entity("DesDer.Models.CustomValue", b =>
                 {
-                    b.HasOne("Destinationosh.Models.CustomField", "CustomField")
+                    b.HasOne("DesDer.Models.CustomField", "CustomField")
                         .WithMany("CustomValues")
                         .HasForeignKey("CustomFieldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Destinationosh.Models.CustomTableRow", "CustomTableRow")
+                    b.HasOne("DesDer.Models.CustomTableRow", "CustomTableRow")
                         .WithMany("CustomValues")
                         .HasForeignKey("CustomTableRowId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -508,9 +508,9 @@ namespace Destinationosh.Migrations
                     b.Navigation("CustomTableRow");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.Post", b =>
+            modelBuilder.Entity("DesDer.Models.Post", b =>
                 {
-                    b.HasOne("Destinationosh.Models.User", "User")
+                    b.HasOne("DesDer.Models.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -519,9 +519,9 @@ namespace Destinationosh.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.PostVisit", b =>
+            modelBuilder.Entity("DesDer.Models.PostVisit", b =>
                 {
-                    b.HasOne("Destinationosh.Models.Post", "Post")
+                    b.HasOne("DesDer.Models.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -541,7 +541,7 @@ namespace Destinationosh.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Destinationosh.Models.User", null)
+                    b.HasOne("DesDer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -550,7 +550,7 @@ namespace Destinationosh.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Destinationosh.Models.User", null)
+                    b.HasOne("DesDer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -565,7 +565,7 @@ namespace Destinationosh.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Destinationosh.Models.User", null)
+                    b.HasOne("DesDer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -574,31 +574,31 @@ namespace Destinationosh.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Destinationosh.Models.User", null)
+                    b.HasOne("DesDer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomField", b =>
+            modelBuilder.Entity("DesDer.Models.CustomField", b =>
                 {
                     b.Navigation("CustomValues");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomTable", b =>
+            modelBuilder.Entity("DesDer.Models.CustomTable", b =>
                 {
                     b.Navigation("CustomFields");
 
                     b.Navigation("CustomTableRows");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.CustomTableRow", b =>
+            modelBuilder.Entity("DesDer.Models.CustomTableRow", b =>
                 {
                     b.Navigation("CustomValues");
                 });
 
-            modelBuilder.Entity("Destinationosh.Models.User", b =>
+            modelBuilder.Entity("DesDer.Models.User", b =>
                 {
                     b.Navigation("Posts");
                 });

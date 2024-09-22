@@ -1,7 +1,7 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Destinationosh.SpaAdmin.ViewModels;
+namespace DesDer.SpaAdmin.ViewModels;
 
 public class UserViewModelValidator : AbstractValidator<UserViewModel>
 {

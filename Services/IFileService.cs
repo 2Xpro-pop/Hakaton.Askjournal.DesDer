@@ -1,7 +1,7 @@
-using Destinationosh.Models;
+using DesDer.Models;
 using MatBlazor;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public interface IFileService
 {

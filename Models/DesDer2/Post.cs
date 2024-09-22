@@ -1,4 +1,4 @@
-﻿namespace Destinationosh.Models.DesDer2
+﻿namespace DesDer.Models.DesDer2
 {
     public class Post
     {

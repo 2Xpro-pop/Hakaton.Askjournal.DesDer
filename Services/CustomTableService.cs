@@ -1,9 +1,9 @@
 ﻿using System.Dynamic;
-using Destinationosh.Models;
-using Destinationosh.Models.DesDer2;
+using DesDer.Models;
+using DesDer.Models.DesDer2;
 using Microsoft.EntityFrameworkCore;
 
-namespace Destinationosh.Services;
+namespace DesDer.Services;
 
 public class CustomTableService : ICustomTableService
 {

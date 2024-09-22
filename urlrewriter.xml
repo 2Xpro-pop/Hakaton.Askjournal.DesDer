@@ -3,9 +3,9 @@
         <rule name="Redirect des.com to www" patternSyntax="ECMAScript" stopProcessing="true">
             <match url=".*" />
             <conditions>
-                <add input="{HTTP_HOST}" pattern="^destinationosh.com$" />
+                <add input="{HTTP_HOST}" pattern="^DesDer.com$" />
             </conditions>
-            <action type="Redirect" url="https://www.destinationosh.com/{R:0}" />
+            <action type="Redirect" url="https://www.DesDer.com/{R:0}" />
         </rule>
     </rules>
   </rewrite>
