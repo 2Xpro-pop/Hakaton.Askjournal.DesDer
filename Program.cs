@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connection = builder.Configuration.GetConnectionString("Smarter");
 
-builder.Services.Configure<SupportedCultureOptions>( builder.Configuration.GetSection("SupportedCultureOptions"));
+builder.Services.Configure<SupportedCultureOptions>(builder.Configuration.GetSection("SupportedCultureOptions"));
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -46,7 +46,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddXssSecurity();
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connection));
 
-builder.Services.AddIdentity<User, IdentityRole>(options => 
+builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 }).AddEntityFrameworkStores<ApplicationContext>()
@@ -133,11 +133,15 @@ app.UseCultureRedirect();
 app.MapFallbackToPage("/{culture}/{*pattern:nonfile}", "/PostsView");
 
 //DataSeeder
-var services = app.Services.CreateAsyncScope();
-await DataSeeder.InitializeAsync(
-    services.ServiceProvider.GetRequiredService<UserManager<User>>(),
-    services.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>()
-);
+using (var services = app.Services.CreateAsyncScope())
+{
+    await DataSeeder.InitializeAsync(
+        services.ServiceProvider.GetRequiredService<UserManager<User>>(),
+        services.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(),
+        services.ServiceProvider.GetRequiredService<ApplicationContext>(),
+        services.ServiceProvider.GetRequiredService<IWebHostEnvironment>()
+    );
+}
 
 #if DEBUG
 if (app.Environment.IsDevelopment())
